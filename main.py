@@ -7,26 +7,11 @@ from sklearn.metrics.pairwise import linear_kernel
  
 df = pd.read_csv("Movies_dataset(ETL)_Final.csv")
 df_c = pd.read_csv("Credits(ETL)_Final.csv")
+datos = pd.read_csv("Datos_ML.csv")
 
 # Instanciar la aplicación:
 app = FastAPI()
 # uvicorn main:app --reload (levanta la API)
-
-# Me quedo con las columnas importantes
-datos = df[["title","vote_average","genres"]]
-
-# Me quedo solo con el primer genero
-lista = []
-for i in datos["genres"].apply(ast.literal_eval):
-    contador = 0
-    if i == []:
-        lista.append("Sin Dato")
-    else:
-        for e in i:
-            if contador == 0:
-                lista.append(i[0])
-                contador += 1
-datos["genres"] = lista
 
 # Saco palabras sin importancia
 palabras = ["the","and","in","of"]
