@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import linear_kernel
  
 df = pd.read_csv("Movies_dataset(ETL)_Final.csv")
 df_c = pd.read_csv("Credits(ETL)_Final.csv")
-datos = pd.read_csv("Datos_ML(10mil registros).csv")
+datos = pd.read_csv("Datos_ML(5mil registros).csv")
 
 # Saco palabras sin importancia
 palabras = ["the","and","in","of"]
