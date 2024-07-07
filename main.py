@@ -13,14 +13,6 @@ datos = pd.read_csv("Datos_ML.csv")
 app = FastAPI()
 # uvicorn main:app --reload (levanta la API)
 
-# Saco palabras sin importancia
-palabras = ["the","and","in","of"]
-vector = TfidfVectorizer(stop_words = palabras)
-matrix = vector.fit_transform(datos["title"])
-
-# Calculo la similitud del coseno
-similitud_cos = linear_kernel(matrix, matrix)
-
 
 @app.get('/Cantidad peliculas Mes') 
 def cantidad_filmaciones_mes(mes: str):
@@ -173,6 +165,14 @@ def get_director(nombre_director):
 @app.get("/Recomendacion")
 def recomendacion(titulo):
     
+    # Saco palabras sin importancia
+    palabras = ["the","and","in","of"]
+    vector = TfidfVectorizer(stop_words = palabras)
+    matrix = vector.fit_transform(datos["title"])
+
+    # Calculo la similitud del coseno
+    similitud_cos = linear_kernel(matrix, matrix)
+
     # Veo si el titulo existe
     if titulo not in datos["title"].values:
         return f"¡El titulo {titulo} no existe!"
