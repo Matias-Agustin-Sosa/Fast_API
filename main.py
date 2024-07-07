@@ -7,7 +7,6 @@ from sklearn.metrics.pairwise import linear_kernel
  
 df = pd.read_csv("Movies_dataset(ETL)_Final.csv")
 df_c = pd.read_csv("Credits(ETL)_Final.csv")
-datos = pd.read_csv("Datos_ML.csv")
 
 # Instanciar la aplicación:
 app = FastAPI()
@@ -164,7 +163,8 @@ def get_director(nombre_director):
 
 @app.get("/Recomendacion")
 def recomendacion(titulo):
-    
+    datos = pd.read_csv("Datos_ML(10mil registros).csv")
+
     # Saco palabras sin importancia
     palabras = ["the","and","in","of"]
     vector = TfidfVectorizer(stop_words = palabras)
